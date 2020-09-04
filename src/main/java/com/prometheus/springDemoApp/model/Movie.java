@@ -2,6 +2,7 @@ package com.prometheus.springDemoApp.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity  // to znamena ze to bude databazova tabulka s nazvom movie
@@ -43,5 +44,18 @@ public class Movie {
 
     public void setMovies(Set<Director> movies) {
         this.directors = movies;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return id == movie.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
