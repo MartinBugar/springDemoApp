@@ -1,9 +1,6 @@
 package com.prometheus.springDemoApp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +14,10 @@ public class Movie {
     private String name;
 
     @ManyToMany
-    Set <Director> movies = new HashSet<>();
+    @JoinTable(name = "movie_director",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "director_id"))
+    Set <Director> directors = new HashSet<>();
 
     public Movie (){}
 
@@ -38,10 +38,10 @@ public class Movie {
     }
 
     public Set<Director> getMovies() {
-        return movies;
+        return directors;
     }
 
     public void setMovies(Set<Director> movies) {
-        this.movies = movies;
+        this.directors = movies;
     }
 }
