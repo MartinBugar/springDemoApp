@@ -6,6 +6,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.awt.desktop.AppHiddenListener;
+
 @Component
 public class DataInit implements ApplicationListener<ContextRefreshedEvent> {
     MovieService movieService;
@@ -16,7 +17,7 @@ public class DataInit implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-    movieService.createAndAddMovie();
+        movieService.createAndAddMovie();
         movieService.createAndAddMovie();
     }
 }
