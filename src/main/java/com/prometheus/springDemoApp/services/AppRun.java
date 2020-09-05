@@ -27,9 +27,9 @@ public class AppRun {
 //    }
 
     @Autowired
-    @Qualifier("slovakHelloWorld")
+//    @Qualifier("slovakHelloWorld")
     HelloWorldService helloWorldService;
-    HelloWorldService slovakHelloWorld;
+//    HelloWorldService slovakHelloWorld;
 
 
 //    // Aj takto bz so islo keby chcem robit cez konstruktor
