@@ -1,6 +1,8 @@
 package com.prometheus.springDemoApp;
 
+import com.kniha.Kniha;
 import com.prometheus.springDemoApp.services.AppRun;
+import com.prometheus.springDemoApp.services.HelloWorldService;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,16 +11,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
-//@ComponentScan(basePackages{"com.prometheus"})
+//@ComponentScan(basePackages={"com.prometheus"})
 public class SpringDemoAppApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context= SpringApplication.run(SpringDemoAppApplication.class, args);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(SpringDemoAppApplication.class, args);
 
-		AppRun appRun = context.getBean(AppRun.class);
-		appRun.run();
+        context.getBean(HelloWorldService.class).sayHello();
 
-
-	}
+    }
 
 }
