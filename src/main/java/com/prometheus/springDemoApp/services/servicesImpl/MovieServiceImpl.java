@@ -3,10 +3,13 @@ package com.prometheus.springDemoApp.services.servicesImpl;
 import com.prometheus.springDemoApp.model.Movie;
 import com.prometheus.springDemoApp.repositories.MovieRepository;
 import com.prometheus.springDemoApp.services.MovieService;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 
 @Service//oznacuje tuto implementaciu interfejsu ako spring bean - komponent - nieco s cim vie robit spring
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class MovieServiceImpl implements MovieService {
 
     MovieRepository movieRepository;
