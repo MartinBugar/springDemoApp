@@ -5,9 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 
 @Configuration
-@PropertySource("classpath:martin.properties")
+@PropertySources({
+        @PropertySource("classpath:martin.properties"),
+        @PropertySource("classpath:bugar.properties")
+})
+
 public class MartinConfig {
 
     @Value("${martin.meno}")
