@@ -38,12 +38,12 @@ public class Movie {
         this.name = name;
     }
 
-    public Set<Director> getMovies() {
+    public Set<Director> getDirectors() {
         return directors;
     }
 
-    public void setMovies(Set<Director> movies) {
-        this.directors = movies;
+    public void setDirectors(Set<Director> directors) {
+        this.directors = directors;
     }
 
     @Override
