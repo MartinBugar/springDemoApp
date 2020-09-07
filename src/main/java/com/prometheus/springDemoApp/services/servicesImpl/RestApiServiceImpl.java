@@ -69,7 +69,7 @@ public class RestApiServiceImpl implements RestApiService {
 
 //        Todo todo = restApiService.getTodo(1L);
 //        System.out.println(todo.getId());
-        System.out.println(restApiService.getTodoList());
+ //       System.out.println(restApiService.getTodoList());
     }
 
 
