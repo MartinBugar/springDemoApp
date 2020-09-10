@@ -4,7 +4,9 @@ import com.prometheus.springDemoApp.model.Movie;
 import com.prometheus.springDemoApp.model.dto.MovieDTO;
 import com.prometheus.springDemoApp.repositories.MovieRepository;
 import com.prometheus.springDemoApp.services.MovieService;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
+
 
 
 
@@ -36,10 +38,10 @@ public class MovieController {
 
 
     @GetMapping("/movies/{id}")
-   RepresentationModel<MovieDTO> getMovieById(@PathVariable("id") long movieId) {
+   EntityModel<MovieDTO> getMovieById(@PathVariable("id") long movieId) {
         MovieDTO movieDTO = movieService.getMovieById(movieId);
 
-        return new RepresentationModel<>(movieDTO
+        return new EntityModel<>(movieDTO
                 ,linkTo(methodOn(MovieController.class).getMovieById(movieId)).withSelfRel()
                 ,linkTo(methodOn(MovieController.class).getMovies("")).withRel("movies")) ;
     }
