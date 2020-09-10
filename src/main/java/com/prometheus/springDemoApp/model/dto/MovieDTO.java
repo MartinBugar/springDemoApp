@@ -1,11 +1,12 @@
 package com.prometheus.springDemoApp.model.dto;
 
 import com.prometheus.springDemoApp.model.Director;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class MovieDTO {
+public class MovieDTO extends RepresentationModel<MovieDTO> {
     private Long id;
     private String name;
     Set<Director> directorsOfTheMovie = new HashSet<>();

@@ -4,9 +4,16 @@ import com.prometheus.springDemoApp.model.Movie;
 import com.prometheus.springDemoApp.model.dto.MovieDTO;
 import com.prometheus.springDemoApp.repositories.MovieRepository;
 import com.prometheus.springDemoApp.services.MovieService;
+import org.springframework.hateoas.RepresentationModel;
+
+
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api")
@@ -29,8 +36,12 @@ public class MovieController {
 
 
     @GetMapping("/movies/{id}")
-    MovieDTO getMovieById(@PathVariable("id") long movieId) {
-        return movieService.getMovieById(movieId);
+   RepresentationModel<MovieDTO> getMovieById(@PathVariable("id") long movieId) {
+        MovieDTO movieDTO = movieService.getMovieById(movieId);
+
+        return new RepresentationModel<>(movieDTO
+                ,linkTo(methodOn(MovieController.class).getMovieById(movieId)).withSelfRel()
+                ,linkTo(methodOn(MovieController.class).getMovies("")).withRel("movies")) ;
     }
 
     @PostMapping("/movies")
