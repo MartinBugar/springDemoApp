@@ -14,5 +14,5 @@ public interface MovieService {
 
     List <MovieDTO> getAllMovies();
 
-    MovieDTO findMovieByName(String name);
+    List<MovieDTO> findMovieByName(String name);
 }

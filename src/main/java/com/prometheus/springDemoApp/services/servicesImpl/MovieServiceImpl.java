@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service//oznacuje tuto implementaciu interfejsu ako spring bean - komponent - nieco s cim vie robit spring
@@ -39,11 +40,15 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<MovieDTO> getAllMovies() {
-        return null;
+        return movieRepository.findAll().stream()
+                .map(movie -> movieMapper.movieToMovieDTO(movie))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public MovieDTO findMovieByName(String name) {
-        return null;
+    public List<MovieDTO> findMovieByName(String name) {
+        return movieRepository.findByName(name).stream().map(movie ->  movieMapper.movieToMovieDTO(movie))
+                .collect(Collectors.toList());
     }
 }
+
