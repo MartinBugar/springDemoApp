@@ -8,8 +8,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
 
 
-
-
+import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +21,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class MovieController {
 
     MovieService movieService;
+    MovieResourcesAssembler movieResourcesAssembler;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieResourcesAssembler movieResourcesAssembler) {
         this.movieService = movieService;
+        this.movieResourcesAssembler = movieResourcesAssembler;
     }
 
     @GetMapping("/movies")
@@ -40,10 +41,8 @@ public class MovieController {
     @GetMapping("/movies/{id}")
    EntityModel<MovieDTO> getMovieById(@PathVariable("id") long movieId) {
         MovieDTO movieDTO = movieService.getMovieById(movieId);
+        return movieResourcesAssembler.toModel(movieDTO);
 
-        return new EntityModel<>(movieDTO
-                ,linkTo(methodOn(MovieController.class).getMovieById(movieId)).withSelfRel()
-                ,linkTo(methodOn(MovieController.class).getMovies("")).withRel("movies")) ;
     }
 
     @PostMapping("/movies")
