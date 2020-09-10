@@ -50,5 +50,10 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findByName(name).stream().map(movie ->  movieMapper.movieToMovieDTO(movie))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public MovieDTO addMovie(MovieDTO movieDTO) {
+        return movieMapper.movieToMovieDTO(movieRepository.save(movieMapper.movieDtoToMovie(movieDTO)));
+    }
 }
 

@@ -33,4 +33,10 @@ public class MovieController {
     MovieDTO getMovieById(@PathVariable("id") long movieId){
         return movieService.getMovieById(movieId);
     }
+
+    @PostMapping("/movies")
+    MovieDTO addMovie (@RequestBody MovieDTO movieDTO){
+            return movieService.addMovie(movieDTO);
+        }
+
 }
