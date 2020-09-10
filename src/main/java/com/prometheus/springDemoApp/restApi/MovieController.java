@@ -19,24 +19,29 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    List<MovieDTO> getMovies(@RequestParam(required = false) String name){
+    List<MovieDTO> getMovies(@RequestParam(required = false) String name) {
 
-        if (name != null && !name.isEmpty()){
+        if (name != null && !name.isEmpty()) {
             return movieService.findMovieByName(name);
         } else
-        return movieService.getAllMovies();
+            return movieService.getAllMovies();
     }
 
 
-
     @GetMapping("/movies/{id}")
-    MovieDTO getMovieById(@PathVariable("id") long movieId){
+    MovieDTO getMovieById(@PathVariable("id") long movieId) {
         return movieService.getMovieById(movieId);
     }
 
     @PostMapping("/movies")
-    MovieDTO addMovie (@RequestBody MovieDTO movieDTO){
-            return movieService.addMovie(movieDTO);
-        }
+    MovieDTO addMovie(@RequestBody MovieDTO movieDTO) {
+        return movieService.addMovie(movieDTO);
+    }
+
+    @PutMapping("/movies/{id}")
+    MovieDTO updateMovie (@RequestBody MovieDTO movieDTO, @PathVariable("id") long movieId){
+        return movieService.updateMovie(movieDTO, movieId);
+    }
+
 
 }

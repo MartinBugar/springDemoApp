@@ -55,5 +55,23 @@ public class MovieServiceImpl implements MovieService {
     public MovieDTO addMovie(MovieDTO movieDTO) {
         return movieMapper.movieToMovieDTO(movieRepository.save(movieMapper.movieDtoToMovie(movieDTO)));
     }
+
+    @Override
+    public MovieDTO updateMovie(MovieDTO movieDTO, long movieId) {
+       return movieMapper.movieToMovieDTO(  movieRepository.findById(movieId)
+                .map(movie -> {
+                            movie.setName(movieDTO.getName());
+                            movie.setDirectors(movieDTO.getDirectorsOfTheMovie());
+                            return movieRepository.save(movie);
+                        }
+                ).orElseGet( () -> {
+//                            movieDTO.setId(movieId);
+                            return movieRepository.save(movieMapper.movieDtoToMovie(movieDTO));
+                        }
+                       )
+                );
+    }
+
+
 }
 

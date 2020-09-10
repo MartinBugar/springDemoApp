@@ -17,4 +17,6 @@ public interface MovieService {
     List<MovieDTO> findMovieByName(String name);
 
     MovieDTO addMovie (MovieDTO movieDTO);
+
+    MovieDTO updateMovie(MovieDTO movieDTO, long movieId);
 }
