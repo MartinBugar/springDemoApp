@@ -4,10 +4,7 @@ import com.prometheus.springDemoApp.model.Movie;
 import com.prometheus.springDemoApp.model.dto.MovieDTO;
 import com.prometheus.springDemoApp.repositories.MovieRepository;
 import com.prometheus.springDemoApp.services.MovieService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,9 +19,15 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    List<MovieDTO> all(){
+    List<MovieDTO> getMovies(@RequestParam(required = false) String name){
+
+        if (name != null && !name.isEmpty()){
+            return movieService.findMovieByName(name);
+        } else
         return movieService.getAllMovies();
     }
+
+
 
     @GetMapping("/movies/{id}")
     MovieDTO getMovieById(@PathVariable("id") long movieId){
